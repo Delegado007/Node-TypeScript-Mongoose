@@ -1,18 +1,21 @@
-import express from 'express';
+import express, { Express, Request, Response } from "express";
+import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 
-const app = express().use(bodyParser.json());
+dotenv.config();
+const app: Express = express().use(bodyParser.json());
 
 const MONGODB_URI = '<your mongodb uri goes here>';
-const PORT = 3000;
+const port: string | number = process.env.PORT || 8000
 
-mongoose
-	.connect(MONGODB_URI)
-	.then(() => {
-		console.log(`Listening on port ${PORT}`);
-		app.listen(PORT);
-	})
-	.catch((err: any) => {
-		console.log('An error has ocurred while connecting to database:', err);
-	});
+
+// mongoose
+//   .connect(MONGODB_URI)
+//   .then(() => {
+//     console.log(`Listening on port ${PORT}`);
+//     app.listen(port);
+//   })
+//   .catch((err: any) => {
+//     console.log('An error has ocurred while connecting to database:', err);
+//   });
