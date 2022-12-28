@@ -4,7 +4,7 @@ Un repositorio que comprueba el uso, buenas prácticas y manejo de tecnologías 
 
 ## Curso realizado siguiendo la guía de OpenBootcamp
 
-Enlace en [Curso MERN](https://campus.open-bootcamp.com/cursos/62).
+Enlace al [Curso MERN](https://campus.open-bootcamp.com/cursos/62).
 
 ## Instalación de dependencias
 
