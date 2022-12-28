@@ -146,3 +146,4 @@ out
 .DS_Store
 .AppleDouble
 .LSOverride
+/mongo_data
