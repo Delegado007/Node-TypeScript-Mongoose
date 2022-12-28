@@ -7,5 +7,5 @@ export interface IHelloController {
 }
 
 export interface IGoodbye {
-  getMessage(): Promise<BasicResponse>
+  getMessage(name: string): Promise<BasicResponse>
 }
