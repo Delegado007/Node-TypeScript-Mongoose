@@ -1,4 +1,4 @@
-import { BasicResponse } from "../types";
+import { BasicResponse, BasicResponseWhitDate } from "../types";
 
 // import { MessageType } from "../types";
 
@@ -7,5 +7,5 @@ export interface IHelloController {
 }
 
 export interface IGoodbye {
-  getMessage(name: string): Promise<BasicResponse>
+  getMessage(name: string): Promise<BasicResponseWhitDate>
 }

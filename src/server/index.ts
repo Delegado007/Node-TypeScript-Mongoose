@@ -18,6 +18,9 @@ const port: string | number = process.env.PORT || 8000;
 // * Define SERVER to use /api and use rootRouter from index.ts in routes
 server.use('/api', rootRouter)
 
+// Static server
+server.use(express.static('public'));
+
 // TODO Mongoose Connection
 
 // * Security Config

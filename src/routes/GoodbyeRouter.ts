@@ -1,3 +1,4 @@
+import { BasicResponse } from "@/controller/types";
 import express, { Request, Response } from "express";
 import { GoodbyeController } from "./../controller/GoodbyeController";
 
@@ -13,7 +14,7 @@ goodbyeRouter.route('/')
     // Create new instance of GoodbyeController
     const controller: GoodbyeController = new GoodbyeController();
     // Obtain Response
-    const response = await controller.getMessage(name);
+    const response: BasicResponse = await controller.getMessage(name);
     // Send to the client the response
     return res.send(response);
   })
