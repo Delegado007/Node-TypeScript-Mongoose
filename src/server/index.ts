@@ -1,19 +1,32 @@
 import express, { Express, Request, Response } from "express";
-
-
-// * Security
+import swaggerUi from 'swagger-ui-express';
 import cors from 'cors';
 import helmet from 'helmet';
+import { MongoClient } from "mongodb";
+import dotenv from 'dotenv';
 
 // TODO HTTPS
 
 // * Root Router
 import rootRouter from '../routes';
 
+// * Enviroment Variables
+dotenv.config();
 
 // * Create Express APP
 const server: Express = express();
-const port: string | number = process.env.PORT || 8000;
+
+// * Swagger Config and route
+server.use(
+  '/docs',
+  swaggerUi.serve,
+  swaggerUi.setup(undefined, {
+    swaggerOptions: {
+      url: "/swagger.json",
+      explorer: true
+    }
+  })
+)
 
 // * Define SERVER to use /api and use rootRouter from index.ts in routes
 server.use('/api', rootRouter)
@@ -21,7 +34,29 @@ server.use('/api', rootRouter)
 // Static server
 server.use(express.static('public'));
 
-// TODO Mongoose Connection
+// connect to mongoDB
+// Connection URI
+const mongoUser = process.env.MONGO_USER
+const mongoPort = process.env.MONGO_PORT
+const mongoPassword = process.env.MONGO_PASSWORD
+const uri = `mongodb://${mongoUser}:${mongoPassword}@localhost:${mongoPort}/?authMechanism=DEFAULT`
+console.log(mongoUser)
+// Create a new MongoClient
+const client = new MongoClient(uri);
+async function run() {
+  try {
+    // Connect the client to the server (optional starting in v4.7)
+    await client.connect();
+    // Establish and verify connection
+    const database = await client.db("test-api");
+    const userCollection = await database.collection("users")
+    console.log("Connected successfully to MongoDB");
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+run().catch(console.dir);
 
 // * Security Config
 server.use(helmet());

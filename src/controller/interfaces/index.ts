@@ -9,3 +9,8 @@ export interface IHelloController {
 export interface IGoodbye {
   getMessage(name: string): Promise<BasicResponseWhitDate>
 }
+
+export interface IUserController {
+  // Read all user from database 
+  getUsers(): Promise<any>
+}
