@@ -7,6 +7,9 @@ import express, { Response, Request } from 'express';
 import helloRouter from './HelloRouter';
 import { LogInfo, LogSuccess } from './../utils/logger';
 import goodbyeRouter from './GoodbyeRouter';
+import userRouter from './UserRouter';
+import semillaRouter from './SemillaRouter';
+
 
 // Server intance
 let server = express();
@@ -26,6 +29,9 @@ rootRouter.get('/', (req: Request, res: Response) => {
 server.use('/', rootRouter) // http://localhost:8000/api
 server.use('/hello', helloRouter) // http://localhost:8000/api/hello
 server.use('/goodbye', goodbyeRouter) // http://localhost:8000/api/hello
+server.use('/users', userRouter) // http://localhost:8000/api/users
+server.use('/semilla', semillaRouter) // http://localhost:8000/api/semilla
+
 
 // Add more routes to the app
 

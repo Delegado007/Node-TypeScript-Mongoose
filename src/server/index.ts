@@ -2,13 +2,14 @@ import express, { Express, Request, Response } from "express";
 import swaggerUi from 'swagger-ui-express';
 import cors from 'cors';
 import helmet from 'helmet';
-import { MongoClient } from "mongodb";
+import { MongoClient, ConnectOptions } from "mongodb";
 import dotenv from 'dotenv';
 
 // TODO HTTPS
 
 // * Root Router
 import rootRouter from '../routes';
+import mongoose from "mongoose";
 
 // * Enviroment Variables
 dotenv.config();
@@ -40,24 +41,34 @@ const mongoUser = process.env.MONGO_USER
 const mongoPort = process.env.MONGO_PORT
 const mongoPassword = process.env.MONGO_PASSWORD
 const uri = `mongodb://${mongoUser}:${mongoPassword}@localhost:${mongoPort}/?authMechanism=DEFAULT`
-console.log(mongoUser)
-// Create a new MongoClient
-const client = new MongoClient(uri);
-async function run() {
-  try {
-    // Connect the client to the server (optional starting in v4.7)
-    await client.connect();
-    // Establish and verify connection
-    const database = await client.db("test-api");
-    const userCollection = await database.collection("users")
-    console.log("Connected successfully to MongoDB");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
-}
-run().catch(console.dir);
 
+// Create a new MongoClient
+// const client = new MongoClient(uri);
+// async function run() {
+//   try {
+//     // Connect the client to the server (optional starting in v4.7)
+//     await client.connect();
+//     // Establish and verify connection
+//     const database = await client.db("cursoMongoV2");
+//     const userCollection = await database.collection("Users")
+//     console.log("Connected successfully to MongoDB");
+//   } finally {
+//     // Ensures that the client will close when you finish/error
+//     await client.close();
+//   }
+// }
+// run().catch(console.dir);
+const options = { useUnifiedTopology: true, useNewUrlParser: true };
+const URI = "mongodb://localhost:27017/test_api"
+mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true } as ConnectOptions)
+  .then(
+    () => {
+      console.log("connection db ready to store")
+    },
+    (err) => {
+      console.log("CONNECTION ERROR - ", err)
+    },
+  )
 // * Security Config
 server.use(helmet());
 server.use(cors());
