@@ -3,7 +3,7 @@ import { IUserController } from "./interfaces";
 import { LogSuccess, LogError, LogWarning } from "./../utils/logger";
 
 // ORM - Users Collection
-import { deleteUserByID, getAllUsers, getUserByID, createUser, updateUserByID } from "./../domain/orm/User.orm";
+import { deleteUserByID, getAllUsers, getUserByID, createUsers, updateUserByID } from "./../domain/orm/User.orm";
 
 
 @Route("/api/users")
@@ -50,21 +50,31 @@ export class UserController implements IUserController {
 
     return response;
   }
-
+  /**
+   * Endpoint to Create the Users in the Collection "users" of DB
+   * @param {any} user user to create in DB
+   * @returns message informing if create was correct
+  */
   @Post("/")
-  public async createUser(user: any): Promise<any> {
+  public async createUser(@Query() user: any): Promise<any> {
 
     if (!user) {
       LogWarning("[/api/users]: body to create user is undefinded")
       return false
     }
-    const response: any = await createUser(user);
+    const response: any = await createUsers(user);
     LogSuccess(`[/api/users]: Create new user: ${user.name}`);
     return response;
   }
 
+  /**
+   * Endpoint to Update the Users in the Collection "users" of DB
+   * @param {string} id id of user to update in DB
+   * @param {any} user user for to update in DB
+   * @returns message informing if create was correct
+  */
   @Put("/")
-  public async updaterUser(@Query() id: string, user: any): Promise<any> {
+  public async updaterUser(@Query() id: string, @Query() user: any): Promise<any> {
 
     let response: any = "";
     if (id) {

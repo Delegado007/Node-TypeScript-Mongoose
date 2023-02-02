@@ -69,7 +69,7 @@
 				"operationId": "GetUsers",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "All user or user found by ID",
 						"content": {
 							"application/json": {
 								"schema": {}
@@ -77,16 +77,113 @@
 						}
 					}
 				},
-				"description": "Endpoint to retrive the User in the collection \"Users\" of DB",
+				"description": "Endpoint to retrive the Users in the Collection \"users\" of DB",
 				"tags": [
 					"UserController"
 				],
 				"security": [],
 				"parameters": [
 					{
+						"description": "ID of user to retreive (optional)",
 						"in": "query",
 						"name": "id",
 						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"delete": {
+				"operationId": "DeleteUser",
+				"responses": {
+					"200": {
+						"description": "message informing if deletion was correct",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"description": "Endpoint to Delete the Users in the Collection \"users\" of DB",
+				"tags": [
+					"UserController"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"description": "ID of user to delete (optional)",
+						"in": "query",
+						"name": "id",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"post": {
+				"operationId": "CreateUser",
+				"responses": {
+					"200": {
+						"description": "message informing if create was correct",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"description": "Endpoint to Create the Users in the Collection \"users\" of DB",
+				"tags": [
+					"UserController"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"description": "user to create in DB",
+						"in": "query",
+						"name": "user",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"put": {
+				"operationId": "UpdaterUser",
+				"responses": {
+					"200": {
+						"description": "message informing if create was correct",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"description": "Endpoint to Update the Users in the Collection \"users\" of DB",
+				"tags": [
+					"UserController"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"description": "id of user to update in DB",
+						"in": "query",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "user for to update in DB",
+						"in": "query",
+						"name": "user",
+						"required": true,
 						"schema": {
 							"type": "string"
 						}

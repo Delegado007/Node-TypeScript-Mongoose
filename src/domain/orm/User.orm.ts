@@ -46,7 +46,7 @@ export const deleteUserByID = async (id: string): Promise<any | undefined> => {
 
 }
 // - Create new User
-export const createUser = async (user: any): Promise<any | undefined> => {
+export const createUsers = async (user: any): Promise<any | undefined> => {
   try {
     let userModel = userEntity();
 
